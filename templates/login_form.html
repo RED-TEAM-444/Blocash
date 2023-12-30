@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>login form</title>
+
+  <!-- custom css file link  -->
+  <link rel="stylesheet" href="/static/css/login.css">
+  <link rel="shortcut icon" href="/static/img/logos.jpg.png">
+</head>
+
+<body>
+
+  <div class="form-container">
+    <img src="/static/img/logos.jpg.png" alt="logo" height="60px" width="60px" class="center">
+    <form action="/login/" method="post">
+      <h3>Login now</h3>
+      {% csrf_token %}
+      <input type="text" name="username" required placeholder="Username">
+      <input type="password" name="password" required placeholder="Password">
+      <input type="submit" name="submit" value="login now" class="form-btn">
+      <p>Don't have an account? <a href={% url 'register' %}>register now</a></p>
+    </form>
+
+  </div>
+
+  <style>
+    #pop {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+  <!-- SweetAlert JS -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  {% if messages %}
+  {% for message in messages %}
+  <script>
+    swal({
+      title: "{{ message }}",
+      text: "{{ message.tags }}",
+      icon: "{% if message.tags == 'error' %}error{% elif message.tags == 'success' %}success{% elif message.tags == 'warning' %}warning{% elif message.tags == 'info' %}info{% endif %}",
+    });
+  </script>
+  {% endfor %}
+  {% endif %}
+
+</body>
+
+</html>

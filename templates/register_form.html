@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>register form</title>
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="/static/css/register.html">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+*{
+   font-family: 'Poppins', sans-serif;
+   margin:0; padding:0;
+   box-sizing: border-box;
+   outline: none; border:none;
+   text-decoration: none;
+   
+}
+
+.container{
+   min-height: 100vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding:20px;
+   padding-bottom: 60px;
+}
+
+.container .content{
+   text-align: center;
+}
+
+.container .content h3{
+   font-size: 30px;
+   color:#000000;
+}
+
+.container .content h3 span{
+   background: rgb(255, 166, 12);
+   color:#fff;
+   border-radius: 5px;
+   padding:0 15px;
+}
+
+.container .content h1{
+   font-size: 50px;
+   color:#333;
+}
+
+.container .content h1 span{
+   color:rgb(255, 166, 12);
+}
+
+.container .content p{
+   font-size: 25px;
+   margin-bottom: 20px;
+}
+
+.container .content .btn{
+   display: inline-block;
+   padding:10px 30px;
+   font-size: 20px;
+   background: #333;
+   color:#fff;
+   margin:0 5px;
+   text-transform: capitalize;
+}
+
+.container .content .btn:hover{
+   background: rgb(255, 166, 12);
+}
+
+.form-container{
+   min-height: 100vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding:20px;
+   padding-bottom: 60px;
+   background: #eee;
+}
+
+.form-container form{
+   padding:20px;
+   border-radius: 5px;
+   box-shadow: 0 5px 10px rgba(0,0,0,.1);
+   background: #fff;
+   text-align: center;
+   width: 500px;
+}
+
+.form-container form h3{
+   font-size: 30px;
+   text-transform: uppercase;
+   margin-bottom: 10px;
+   color:#333;
+}
+
+.form-container form input,
+.form-container form select{
+   width: 100%;
+   padding:10px 15px;
+   font-size: 17px;
+   margin:8px 0;
+   background: #eee;
+   border-radius: 5px;
+}
+
+.form-container form select option{
+   background: #fff;
+}
+
+.form-container form .form-btn{
+   background: #333;
+   color:rgb(255, 166, 12);
+   text-transform: capitalize;
+   font-size: 20px;
+   cursor: pointer;
+}
+
+.form-container form .form-btn:hover{
+   background: rgb(255, 166, 12);
+   color:#030000;
+}
+
+.form-container form p{
+   margin-top: 10px;
+   font-size: 20px;
+   color:#333;
+}
+
+.form-container form p a{
+   color:rgb(255, 166, 12);
+}
+
+.form-container form .error-msg{
+   margin:10px 0;
+   display: block;
+   background: rgb(255, 166, 12);
+   color:#fff;
+   border-radius: 5px;
+   font-size: 20px;
+   padding:10px;
+}
+</style>
+</head>
+<body>
+   
+<div class="form-container">
+
+   <form action="/register/" method="post" >
+   <a href="/"><img src="/static/img/logos.jpg.png" alt="blocash" height="50px" width="50px" />
+								</a>
+      <h3><b>Blocash</b></h3>
+      {% csrf_token %}
+      <input type="text" name="username" required placeholder="Choose a username">
+      <input type="text" name="fname" required placeholder="enter your first name">
+      <input type="text" name="lname"  placeholder="enter your last name">
+      <input type="email" name="email" required placeholder="enter your email">
+      <input type="password" name="password1" required placeholder="enter your password">
+      <input type="password" name="password2" required placeholder="confirm your password">
+     
+      <div class="field phone">
+
+         <input type="text" name="phone" required placeholder="Phone Number" required id="id_phone" maxlength="13" />
+         </div>
+         
+         <div class="field state">
+            
+         </div>
+      <li >I understand the risks involved in trading stock, commodity, and currency
+         markets.</li>
+      <li>I understand the risks of my program not working as intended. I take full
+         responsibility for any losses that may arise while trading programmatically.
+      </li>
+      <li>I have read the <a target='_blank' href='terms&condition.html'>Terms and
+            Conditions</a> and accept it.</li>
+         </label>
+      I AGREE TO THE ABOVE TERMS:
+<input type="checkbox" name="disclaimer" required id="id_disclaimer" />
+
+<input type="submit" name="submit" value="register now" class="form-btn">
+<p>already have an account? <a href="login_form.php">login now</a></p>
+
+</div>
+
+
+
+   </form>
+
+</div>
+
+</body>
+
+
+{% if messages %}
+  {% for message in messages %}
+    <script>
+      swal({
+        title: "{{ message }}",
+        text: "{{ message.tags }}",
+        icon: "{% if message.tags == 'error' %}error{% elif message.tags == 'success' %}success{% elif message.tags == 'warning' %}warning{% elif message.tags == 'info' %}info{% endif %}",
+      });
+    </script>
+  {% endfor %}
+{% endif %}
+
+</html>
